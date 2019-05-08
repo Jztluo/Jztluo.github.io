@@ -4,7 +4,7 @@ title:  "怎样修改 rails 日志格式"
 date:   2019-04-17 10:40:52 +0800
 categories: rails
 ---
-# 发现问题
+# 问题
 - ruby 2.5.1
 - rails 5.2.2.1
 - graphql 1.9.3
@@ -27,7 +27,7 @@ Parameters: {"query"=>"{\n  packages{\n    name\n  }\n}", "variables"=>{"id"=>1}
 
 体验不友好，希望能找到改变这个日志格式的方法.
 
-#  寻找原因
+#  原因
 
 rails 日志服务使用的是 ActiveSupport::Notifications + ActiveSupport::LogSubscriber. LogSubscriber 的文档中有如下使用例子:
 ```ruby
@@ -85,7 +85,7 @@ end
 ```
 可以在这下手改变 graphql 的日志格式。
 
-# 解决办法
+# 解决
 在 initializer 中编写以下代码。
 ```
 require "action_controller/log_subscriber"

@@ -4,7 +4,7 @@ title:  "carrierwave-aliyun 远端文件不会随记录更新而删除的问题"
 date:   2019-04-16 14:34:52 +0800
 categories: rails carrierwave
 ---
-# 发现问题
+# 问题
 - rails 5.2.2.1
 - carrierwave 1.3.1
 - carrierwave-aliyun 0.9.0
@@ -25,7 +25,7 @@ package.remove_image! # 删除失败
 package.image.remove! # 删除成功
 ```
 
-#  寻找原因
+#  原因
 
 正常情况下，当方法 package.remove_image! 成功调用到 package.image.remove! 时文件会删除成功。现在猜测问题就出在调用 package.remove_image! 方法后，并没有调用 package.image.remove!
 
@@ -70,7 +70,7 @@ end
 
 回来看 CarrierWave::Storage::AliyunFile 没有为 @file 赋值过, 也没有实现 exists？方法, 所以 file.blank? 为 nil. 也就是阿里云 OSS 文件没有被删除的原因.
 
-# 解决办法
+# 解决
 
 在 https://github.com/huacnlee/carrierwave-aliyun/issues/55 里提供了解决办法. 但由于这个问题存在已久, 作者未回应. 且这个 gem 依赖的 aliyun-oss-sdk 版本过于老旧, 更新的希望渺茫.
 

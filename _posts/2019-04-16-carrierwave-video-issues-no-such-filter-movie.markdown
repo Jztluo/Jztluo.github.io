@@ -4,7 +4,7 @@ title:  "carrierwave-aliyun 报错:No such filter movie"
 date:   2019-04-16 14:34:52 +0800
 categories: rails carrierwave
 ---
-# 发现问题
+# 问题
 - rails 5.2.2.1
 - carrierwave 1.3.1
 - carrierwave-video 0.6.0
@@ -29,7 +29,7 @@ E, [2019-04-04T14:14:56.776727 #23269] ERROR -- : Failed encoding...
 
 拼成字符串后，用命令行执行又可以成功。
 
-#  寻找原因
+#  原因
 
 carrierwave-video issues 没有人和我一样的问题
 
@@ -56,7 +56,7 @@ end
 ```
 看来一开始就会加上引号，在之后在几次调用中 ` FFMPEG::Movie#transcode => FFMPEG::Transcoder#transcode_movie => Open3.popen3` 参数也没有被改变.
 
-# 解决办法
+# 解决
 
 在一开始的时候去掉引号，就能跑通了. 至于会不会导致其他环境出问题就不深究了.
 ```ruby
